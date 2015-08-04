@@ -85,7 +85,7 @@ def numbersPage() {
 		section {
 			paragraph(name: "pGraph", title: "These lights will show the temperature", fancyDeviceString(tempBulbs))
 			if (foreBulbs) {
-			  paragraph(name: "pGraph", title: "and these lights will show the forecast", fancyDeviceString(foreBulbs))
+			  paragraph(name: "pGraph2", title: "and these lights will show the forecast", fancyDeviceString(foreBulbs))
 		    }
 		}
 
@@ -716,19 +716,19 @@ def setWeatherColors() {
 	}
 	switch (newforecast){
 		case ["chanceflurries","chancesleet","chancesnow","flurries","sleet","snow"]:  //Snow
-		  atomicState.foreHue = 70
+		  atomicState.foreHue = 83
 		  break
 		case ["chancerain","rain"]:
-		  atomicState.foreHue = 70
+		  atomicState.foreHue = 75
 		  break
 	    case ["chancetstorms","tstorms"]:
-		  atomicState.foreHue = 70
+		  atomicState.foreHue = 10
 		  break
 	    case ["clear","fog","mostlysunny","partlysunny","sunny","unknown"]:
-		  atomicState.foreHue = 70
+		  atomicState.foreHue = 25
 		  break
 	    case ["cloudy","hazy","mostlycloudy","partlycloudy"]:
-		  atomicState.foreHue = 70
+		  atomicState.foreHue = 37
 		  break
 	}
 
