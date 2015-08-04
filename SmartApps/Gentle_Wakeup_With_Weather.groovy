@@ -12,7 +12,7 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
- * Description:  This app will slowly turn on lights at a designated time to act as an alarm with colors based on the forcast.  
+ * Description:  This app will slowly turn on lights at a designated time to act as an alarm with colors based on the forecast.  
  *   It can use two lights (or two groups of lights) and will set the color of the first group based on the forecasted high for that day, 
  *     and the second group will be colored based on the weather forecast.  If only one light (or light group) is selected then it will
  *     show the temperature for that day but not the forecast.
