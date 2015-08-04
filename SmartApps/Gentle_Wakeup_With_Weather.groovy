@@ -13,13 +13,14 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  * Description:  This app will slowly turn on lights at a designated time to act as an alarm with colors based on the forcast.  
- *   It requires two lights (or two groups of lights) and will set the color of the first group based on the forecasted high for that day, 
- *     and the second group will be colored based on the weather forecast.
+ *   It can use two lights (or two groups of lights) and will set the color of the first group based on the forecasted high for that day, 
+ *     and the second group will be colored based on the weather forecast.  If only one light (or light group) is selected then it will
+ *     show the temperature for that day but not the forecast.
  *    
- *   Temperature Colors:  TBD
- *    Forecast colors: TBD
+ *   Temperature Colors:  Blue to green to yellow to orange to red (cold to hot)
+ *    Forecast colors: Sunny - Yellow; Cloudy - Pink; Rain - Purple; Thunder - orange; Snow - Blue
  *
- *   Credits to the Gental Wake Up app (which was the base for this app) and the Smart Weather Lamp app (for how to pull in the forecast).
+ *   Credits to the Gental Wake Up app which was the base for this app.
  *
  * Author: Jim Worley
  *
@@ -54,6 +55,9 @@ def rootPage() {
 		}
 
 		if (tempBulbs) {
+			section {
+				input(name: "foreBulbs", type: "capability.colorControl", title: "Which color bulb(s) show the forecast (optional)", description: null, multiple: true, required: false)
+			}
 
 			section {
 				href(name: "toNumbersPage", page: "numbersPage", title: "Duration & Direction", description: numbersPageHrefDescription(), state: "complete")
@@ -79,7 +83,10 @@ def numbersPage() {
 	dynamicPage(name:"numbersPage", title:"") {
 
 		section {
-			paragraph(name: "pGraph", title: "These lights will dim", fancyDeviceString(tempBulbs))
+			paragraph(name: "pGraph", title: "These lights will show the temperature", fancyDeviceString(tempBulbs))
+			if (foreBulbs) {
+			  paragraph(name: "pGraph", title: "and these lights will show the forecast", fancyDeviceString(foreBulbs))
+		    }
 		}
 
 		section {
@@ -304,7 +311,14 @@ def updateDimmers(percentComplete) {
 	//Set the color and brightness of the temperature bulb
 	tempBulbs.each { dimmer ->
 		def nextLevel = dynamicLevel(dimmer, percentComplete)
-		dimmer.setColor([hue: atomicState.hue, saturation: 100, level: nextLevel])
+		dimmer.setColor([hue: atomicState.tempHue, saturation: 100, level: nextLevel])
+	}
+
+	if (foreBulbs){
+		foreBulbs.each { dimmer ->
+			def nextLevel = dynamicLevel(dimmer, percentComplete)
+			dimmer.setColor([hue: atomicState.foreHue, saturation: 100, level: nextLevel])
+		}
 	}
 }
 
@@ -418,6 +432,15 @@ def setLevelsInState() {
 	def startLevels = [:]
 	tempBulbs.each { dimmer ->
 		startLevels[dimmer.id] = startLevel
+		//It can take a moment before the first bulb update, so lets go ahead and turn down the brightness
+		dimmer.setColor([level: startLevel])
+	}
+	if (foreBulbs){
+	  foreBulbs.each { dimmer ->
+		startLevels[dimmer.id] = startLevel
+		//It can take a moment before the first bulb update, so lets go ahead and turn down the brightness
+		dimmer.setColor([level: startLevel])
+	}
 	}
 
 	atomicState.startLevels = startLevels
@@ -543,7 +566,12 @@ def schedulingHrefDescription() {
 		descriptionParts << "On ${fancyString(days)},"
 	}
 
-	descriptionParts << "${fancyDeviceString(tempBulbs)} will start dimming"
+    if (foreBulbs){
+		descriptionParts << "${fancyDeviceString(tempBulbs)} and ${fancyDeviceString(foreBulbs)} will start dimming"
+	}
+	else {
+		descriptionParts << "${fancyDeviceString(tempBulbs)} will start dimming"
+	}
 
 	if (startTime) {
 		descriptionParts << "at ${humanReadableStartDate()}"
@@ -625,7 +653,7 @@ def completionHrefDescription() {
 }
 
 def numbersPageHrefDescription() {
-	def title = "All bulbs will dim for ${duration ?: '30'} minutes from ${startLevel}% to ${endLevel}% and the color will be set based on the weather."
+	def title = "All bulbs will dim for ${duration ?: '30'} minutes from ${startLevel ?: '0'} to ${endLevel ?: '99'} and the color will be set based on the weather."
 
     return title
 }
@@ -644,47 +672,68 @@ def setWeatherColors() {
 	}
 
 	if (!forecast){
-		atomicState.hue = 50
+		atomicState.tempHue = 50
+		atomicState.foreHue = 50
 		return
 	}
 
 	def temp_f = forecast.forecast.simpleforecast.forecastday[0].high.fahrenheit.toInteger()
+	def newforecast = forecast.forecast.simpleforecast.forecastday[0].icon
 	log.debug "Today's temp will be: $temp_f"
+	log.debug "and today's forecast is: $newforecast"
 
 	switch (temp_f) {
 		case Integer.MIN_VALUE..20:
-		  atomicState.hue = 75
+		  atomicState.tempHue = 75
 		  break;
 		case 21..35:
-		  atomicState.hue = 66.4
+		  atomicState.tempHue = 66.4
 		  break;
 		case 36..45:
-		  atomicState.hue = 58.1
+		  atomicState.tempHue = 58.1
 		  break;
 		case 46..55:
-		  atomicState.hue = 49.8
+		  atomicState.tempHue = 49.8
 		  break;
 		case 56..65:
-		  atomicState.hue = 41.5
+		  atomicState.tempHue = 41.5
 		  break;
 		case 66..75:
-		  atomicState.hue = 33.2
+		  atomicState.tempHue = 33.2
 		  break;
 		case 76..85:
-		  atomicState.hue = 24.9
+		  atomicState.tempHue = 24.9
 		  break;
 		case 86..95:
-		  atomicState.hue = 16.6
+		  atomicState.tempHue = 16.6
 		  break;
 		case 96..105:
-		  atomicState.hue = 8.3
+		  atomicState.tempHue = 8.3
 		  break;
 		case 106..integer.MAX_VALUE:
-		  atomicState.hue = 0
+		  atomicState.tempHue = 0
 		  break;
 	}
+	switch (newforecast){
+		case ["chanceflurries","chancesleet","chancesnow","flurries","sleet","snow"]:  //Snow
+		  atomicState.foreHue = 70
+		  break
+		case ["chancerain","rain"]:
+		  atomicState.foreHue = 70
+		  break
+	    case ["chancetstorms","tstorms"]:
+		  atomicState.foreHue = 70
+		  break
+	    case ["clear","fog","mostlysunny","partlysunny","sunny","unknown"]:
+		  atomicState.foreHue = 70
+		  break
+	    case ["cloudy","hazy","mostlycloudy","partlycloudy"]:
+		  atomicState.foreHue = 70
+		  break
+	}
 
-	log.debug "The temp color hue is: ${atomicState.hue}"
+	log.debug "The temp color hue is: ${atomicState.tempHue}"
+	log.debug "The forecast color hue is: ${atomicState.foreHue}"
 }
 
 def locationIsDefined() {
