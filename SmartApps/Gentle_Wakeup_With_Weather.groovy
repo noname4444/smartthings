@@ -94,8 +94,8 @@ def numbersPage() {
 		}
 
 		section {
-			input(name: "startLevel", type: "number", range: "0..99", title: "From this level", defaultValue: 0, description: "Between 0 and 99", required: true, multiple: false)
-			input(name: "endLevel", type: "number", range: "0..99", title: "To this level", defaultValue: 99, description: "Between 0 and 99, greater than the From", required: true, multiple: false)
+			input(name: "startLevel", type: "number", range: "1..99", title: "From this level", defaultValue: 1, description: "Between 1 and 99", required: true, multiple: false)
+			input(name: "endLevel", type: "number", range: "2..99", title: "To this level", defaultValue: 99, description: "Between 2 and 99, greater than the From", required: true, multiple: false)
 		}
 		
 	}
@@ -229,11 +229,9 @@ def scheduledStart() {
 def start() {
 	log.trace "START"
 
-	if (endLevel <= startLevel) {
+	if (dynamicEndLevel() <= dynamicStartLevel()) {
 		log.error "The end level is smaller than the start level.  Booo."
 	}
-
-	setLevelsInState()
 
 	setWeatherColors()
 
@@ -323,7 +321,7 @@ def updateDimmers(percentComplete) {
 }
 
 int dynamicLevel(dimmer, percentComplete) {
-	def start = atomicState.startLevels[dimmer.id]
+	def start = dynamicStartLevel()
 	def end = dynamicEndLevel()
 
 	if (!percentComplete) {
@@ -428,24 +426,6 @@ def resumePlaying() {
 // Helpers
 // ========================================================
 
-def setLevelsInState() {
-	def startLevels = [:]
-	tempBulbs.each { dimmer ->
-		startLevels[dimmer.id] = startLevel
-		//It can take a moment before the first bulb update, so lets go ahead and turn down the brightness
-		dimmer.setColor([level: startLevel])
-	}
-	if (foreBulbs){
-	  foreBulbs.each { dimmer ->
-		startLevels[dimmer.id] = startLevel
-		//It can take a moment before the first bulb update, so lets go ahead and turn down the brightness
-		dimmer.setColor([level: startLevel])
-	}
-	}
-
-	atomicState.startLevels = startLevels
-}
-
 def canStartAutomatically() {
 
 	def today = new Date().format("EEEE")
@@ -482,12 +462,14 @@ int totalRunTimeMillis() {
 	return millis as int
 }
 
-int dynamicEndLevel() {
-	return endLevel as int
+
+int dynamicStartLevel() {
+	return startLevel ?: 1 as int
 }
 
-
-
+int dynamicEndLevel() {
+	return endLevel ?: 99 as int
+}
 
 private hasSetLevelCommand(device) {
 	def isDimmer = false
