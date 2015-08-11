@@ -1,5 +1,5 @@
 /**
- *  Gentle Wake Up With Smart Weather
+ *  Gentle Wake Up With Smart Weather v1.1.0
  *
  *  Copyright 2015 Jim Worley
  *
@@ -47,6 +47,10 @@ preferences {
 	page(name: "numbersPage")
 }
 
+/*
+* This is the main page the user will see.  First, they select a bulb or group of bulbs.
+* Next there are multiple options they can choose.  Ideally they will select a second bulb (or second group of bulbs)
+*/
 def rootPage() {
 	dynamicPage(name: "rootPage", title: "", install: true, uninstall: true) {
 
@@ -56,12 +60,25 @@ def rootPage() {
 
 		if (tempBulbs) {
 			section {
-				input(name: "foreBulbs", type: "capability.colorControl", title: "Which color bulb(s) show the forecast (optional)", description: null, multiple: true, required: false)
+				input(name: "foreBulbs", type: "capability.colorControl", title: "Which color bulb(s) show the forecast (optional)", description: null, multiple: true, required: false, submitOnChange: true)
 			}
 
 			section {
 				href(name: "toNumbersPage", page: "numbersPage", title: "Duration & Direction", description: numbersPageHrefDescription(), state: "complete")
 			}
+
+            //Error checking!
+			if (isErrors()) {
+              section(hideable: false) {
+                	if (dynamicStartLevel() >= dynamicEndLevel()) {
+                        paragraph(name: "error1", title: "ERROR: Dimming Levels", "The end level MUST be larger than the start level.  Please update your values.")
+                    }
+                    if (bulbIntersects()) {
+                        paragraph(name: "error2", title: "ERROR: Bulbs in Multiple Groups", "The following bulbs are in both the temperature bulb list and the forecast bulb list: ${fancyDeviceString(bulbIntersects())}")
+                    }
+				    input(name: "dummy", type: "capability.nope", title: null, description: null, required: true)
+			  }
+            }
 
 			section {
 				href(name: "toSchedulingPage", page: "schedulingPage", title: "Rules For Automatically Dimming Your Lights", description: schedulingHrefDescription(), state: schedulingHrefDescription() ? "complete" : "")
@@ -75,10 +92,22 @@ def rootPage() {
 				// TODO: fancy label
 				label(title: "Label this SmartApp", required: false, defaultValue: "")
 			}
+			if (!isErrors()) {
+            	section(hideable: true, hidden: true, title: "Error Report") {
+            		input(name: "dummy", type: "capability.nope", title: null, description: "No errors were found and you can install this app.", required: false, state: "complete")
+            	}
+            }
 		}
 	}
 }
 
+def isErrors() {
+	return (dynamicStartLevel() >= dynamicEndLevel() || bulbIntersects())
+}
+
+/*
+* Allows the user to set the time it takes for the bubls to brighten, as well as the start to end levels 
+*/
 def numbersPage() {
 	dynamicPage(name:"numbersPage", title:"") {
 
@@ -101,6 +130,9 @@ def numbersPage() {
 	}
 }
 
+/* 
+* Allows the user to choose when to have the ligths come on
+*/
 def schedulingPage() {
 	dynamicPage(name: "schedulingPage", title: "Rules For Automatically Dimming Your Lights") {
 
@@ -125,6 +157,9 @@ def schedulingPage() {
 	}
 }
 
+/*
+* Allows the user to set various things to happen when the lights are done dimming
+*/
 def completionPage() {
 	dynamicPage(name: "completionPage", title: "Completion Rules") {
 
@@ -155,6 +190,7 @@ def completionPage() {
 		}
 	}
 }
+
 
 // ========================================================
 // Handlers
@@ -471,6 +507,16 @@ int dynamicEndLevel() {
 	return endLevel ?: 99 as int
 }
 
+/*
+ * Converts the device lists to regular lists so that I can run intersect on them
+ */
+private bulbIntersects() {
+	if (tempBulbs && foreBulbs) {
+      return tempBulbs.findAll {foreBulbs*.id.contains( it.id )}
+	}
+	else return null
+}
+
 private hasSetLevelCommand(device) {
 	def isDimmer = false
 	device.supportedCommands.each {
@@ -716,6 +762,7 @@ def setWeatherColors() {
 
 	log.debug "The temp color hue is: ${atomicState.tempHue}"
 	log.debug "The forecast color hue is: ${atomicState.foreHue}"
+	sendNotificationEvent("Today will be ${forecast.forecast.txt_forecast.forecastday[0].fcttext}")
 }
 
 def locationIsDefined() {
