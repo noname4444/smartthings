@@ -1,5 +1,5 @@
 /**
- *  Gentle Wake Up With Smart Weather v1.1.0
+ *  Gentle Wake Up With Smart Weather v1.1.1
  *
  *  Copyright 2015 Jim Worley
  *
@@ -35,9 +35,7 @@ definition(
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Developers/smart-light-timer.png",
     iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Developers/smart-light-timer@2x.png",
-    iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Developers/smart-light-timer@2x.png") {
-    appSetting "forcastKey"
-}
+    iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Developers/smart-light-timer@2x.png")
 
 
 preferences {
@@ -205,6 +203,7 @@ def installed() {
 def updated() {
 	log.debug "Updating 'Gentle Wake Up' with settings: ${settings}"
 	unschedule()
+	unsubscribe()
 
 	initialize()
 }
