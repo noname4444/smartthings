@@ -1,0 +1,79 @@
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:20 PM: debug "zw device: 09, command: 8407, payload: " parsed to [8408, ['descriptionText':Bedroom Smoke Alarm woke up, 'isStateChange':false, 'displayed':false, 'linkText':'Bedroom Smoke Alarm']]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:20 PM: debug Smoke Detector CMD properties: [commandClassId:132, commandId:7, class:class physicalgraph.zwave.commands.wakeupv1.WakeUpNotification, CMD:8407, payload:[]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:20 PM: debug Smoke Detector CMD: WakeUpNotification()
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:20 PM: debug Smoke Detector description: zw device: 09, command: 8407, payload:
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug "zw device: 09, command: 7105, payload: 01 00 00 FF 01 02 00 00 " parsed to [['name':'smoke', 'value':'detected', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'displayed':false, 'isStateChange':false, 'linkText':'Bedroom Smoke Alarm'], ['name':'alarmState', 'value':'smoke', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'isStateChange':false, 'displayed':false, 'linkText':'Bedroom Smoke Alarm']]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector CMD properties: [commandClassId:113, ZWAVE_ALARM_TYPE_ACCESS_CONTROL:6, ZWAVE_ALARM_TYPE_EMERGENCY:10, ZWAVE_ALARM_TYPE_RESERVED0:0, ZWAVE_ALARM_TYPE_FIRST:255, ZWAVE_ALARM_TYPE_SMOKE:1, ZWAVE_ALARM_TYPE_HEAT:4, zwaveAlarmEvent:2, numberOfEventParameters:0, ZWAVE_ALARM_TYPE_BURGLAR:7, ZWAVE_ALARM_TYPE_CLOCK:11, zwaveAlarmStatus:255, alarmLevel:0, eventParameter:[], ZWAVE_ALARM_TYPE_WATER:5, payload:[1, 0, 0, 255, 1, 2, 0], ZWAVE_ALARM_TYPE_CO2:3, zensorNetSourceNodeId:0, commandId:5, class:class physicalgraph.zwave.commands.alarmv2.AlarmReport, ZWAVE_ALARM_TYPE_CO:2, ZWAVE_ALARM_TYPE_SYSTEM:9, zwaveAlarmType:1, ZWAVE_ALARM_TYPE_POWER_MANAGEMENT:8, alarmType:1, CMD:7105]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector CMD: AlarmReport(alarmLevel: 0, alarmType: 1, eventParameter: [], numberOfEventParameters: 0, zensorNetSourceNodeId: 0, zwaveAlarmEvent: 2, zwaveAlarmStatus: 255, zwaveAlarmType: 1)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector description: zw device: 09, command: 7105, payload: 01 00 00 FF 01 02 00 00
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug "zw device: 09, command: 2001, payload: 00 " parsed to [['displayed':false, 'linkText':'Bedroom Smoke Alarm', 'descriptionText':Bedroom Smoke Alarm: BasicSet(value: 0), 'isStateChange':false]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector CMD properties: [commandClassId:32, value:0, commandId:1, class:class physicalgraph.zwave.commands.basicv1.BasicSet, CMD:2001, payload:[0]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector CMD: BasicSet(value: 0)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:17 PM: debug Smoke Detector description: zw device: 09, command: 2001, payload: 00
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:15 PM: debug "zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00 " parsed to [['name':'smoke', 'value':'detected', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'displayed':false, 'isStateChange':false, 'linkText':'Bedroom Smoke Alarm'], ['name':'alarmState', 'value':'smoke', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'isStateChange':false, 'displayed':false, 'linkText':'Bedroom Smoke Alarm']]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:15 PM: debug Smoke Detector CMD properties: [commandClassId:113, ZWAVE_ALARM_TYPE_ACCESS_CONTROL:6, ZWAVE_ALARM_TYPE_EMERGENCY:10, ZWAVE_ALARM_TYPE_RESERVED0:0, ZWAVE_ALARM_TYPE_FIRST:255, ZWAVE_ALARM_TYPE_SMOKE:1, ZWAVE_ALARM_TYPE_HEAT:4, zwaveAlarmEvent:2, numberOfEventParameters:0, ZWAVE_ALARM_TYPE_BURGLAR:7, ZWAVE_ALARM_TYPE_CLOCK:11, zwaveAlarmStatus:255, alarmLevel:255, eventParameter:[], ZWAVE_ALARM_TYPE_WATER:5, payload:[1, 255, 0, 255, 1, 2, 0], ZWAVE_ALARM_TYPE_CO2:3, zensorNetSourceNodeId:0, commandId:5, class:class physicalgraph.zwave.commands.alarmv2.AlarmReport, ZWAVE_ALARM_TYPE_CO:2, ZWAVE_ALARM_TYPE_SYSTEM:9, zwaveAlarmType:1, ZWAVE_ALARM_TYPE_POWER_MANAGEMENT:8, alarmType:1, CMD:7105]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:15 PM: debug Smoke Detector CMD: AlarmReport(alarmLevel: 255, alarmType: 1, eventParameter: [], numberOfEventParameters: 0, zensorNetSourceNodeId: 0, zwaveAlarmEvent: 2, zwaveAlarmStatus: 255, zwaveAlarmType: 1)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:15 PM: debug Smoke Detector description: zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:14 PM: debug "zw device: 09, command: 2001, payload: FF " parsed to [['displayed':false, 'linkText':'Bedroom Smoke Alarm', 'descriptionText':Bedroom Smoke Alarm: BasicSet(value: 255), 'isStateChange':false]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:14 PM: debug Smoke Detector CMD properties: [commandClassId:32, value:255, commandId:1, class:class physicalgraph.zwave.commands.basicv1.BasicSet, CMD:2001, payload:[255]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:14 PM: debug Smoke Detector CMD: BasicSet(value: 255)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:14 PM: debug Smoke Detector description: zw device: 09, command: 2001, payload: FF
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug "zw device: 09, command: 2001, payload: FF " parsed to [['displayed':false, 'linkText':'Bedroom Smoke Alarm', 'descriptionText':Bedroom Smoke Alarm: BasicSet(value: 255), 'isStateChange':false]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector CMD properties: [commandClassId:32, value:255, commandId:1, class:class physicalgraph.zwave.commands.basicv1.BasicSet, CMD:2001, payload:[255]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector CMD: BasicSet(value: 255)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector description: zw device: 09, command: 2001, payload: FF
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug "zw device: 09, command: 2001, payload: FF " parsed to [['displayed':false, 'linkText':'Bedroom Smoke Alarm', 'descriptionText':Bedroom Smoke Alarm: BasicSet(value: 255), 'isStateChange':false]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector CMD properties: [commandClassId:32, value:255, commandId:1, class:class physicalgraph.zwave.commands.basicv1.BasicSet, CMD:2001, payload:[255]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector CMD: BasicSet(value: 255)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:12 PM: debug Smoke Detector description: zw device: 09, command: 2001, payload: FF
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:11 PM: debug "zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00 " parsed to [['name':'smoke', 'value':'detected', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'displayed':false, 'isStateChange':false, 'linkText':'Bedroom Smoke Alarm'], ['name':'alarmState', 'value':'smoke', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'isStateChange':false, 'displayed':false, 'linkText':'Bedroom Smoke Alarm']]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:11 PM: debug Smoke Detector CMD properties: [commandClassId:113, ZWAVE_ALARM_TYPE_ACCESS_CONTROL:6, ZWAVE_ALARM_TYPE_EMERGENCY:10, ZWAVE_ALARM_TYPE_RESERVED0:0, ZWAVE_ALARM_TYPE_FIRST:255, ZWAVE_ALARM_TYPE_SMOKE:1, ZWAVE_ALARM_TYPE_HEAT:4, zwaveAlarmEvent:2, numberOfEventParameters:0, ZWAVE_ALARM_TYPE_BURGLAR:7, ZWAVE_ALARM_TYPE_CLOCK:11, zwaveAlarmStatus:255, alarmLevel:255, eventParameter:[], ZWAVE_ALARM_TYPE_WATER:5, payload:[1, 255, 0, 255, 1, 2, 0], ZWAVE_ALARM_TYPE_CO2:3, zensorNetSourceNodeId:0, commandId:5, class:class physicalgraph.zwave.commands.alarmv2.AlarmReport, ZWAVE_ALARM_TYPE_CO:2, ZWAVE_ALARM_TYPE_SYSTEM:9, zwaveAlarmType:1, ZWAVE_ALARM_TYPE_POWER_MANAGEMENT:8, alarmType:1, CMD:7105]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:11 PM: debug Smoke Detector CMD: AlarmReport(alarmLevel: 255, alarmType: 1, eventParameter: [], numberOfEventParameters: 0, zensorNetSourceNodeId: 0, zwaveAlarmEvent: 2, zwaveAlarmStatus: 255, zwaveAlarmType: 1)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:11 PM: debug Smoke Detector description: zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug "zw device: 09, command: 2001, payload: FF " parsed to [['displayed':false, 'linkText':'Bedroom Smoke Alarm', 'descriptionText':Bedroom Smoke Alarm: BasicSet(value: 255), 'isStateChange':false]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector CMD properties: [commandClassId:32, value:255, commandId:1, class:class physicalgraph.zwave.commands.basicv1.BasicSet, CMD:2001, payload:[255]]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector CMD: BasicSet(value: 255)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector description: zw device: 09, command: 2001, payload: FF
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug "zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00 " parsed to [['name':'smoke', 'value':'detected', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'displayed':false, 'isStateChange':false, 'linkText':'Bedroom Smoke Alarm'], ['name':'alarmState', 'value':'smoke', 'descriptionText':Bedroom Smoke Alarm smoke was detected!, 'isStateChange':false, 'displayed':false, 'linkText':'Bedroom Smoke Alarm']]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector CMD properties: [commandClassId:113, ZWAVE_ALARM_TYPE_ACCESS_CONTROL:6, ZWAVE_ALARM_TYPE_EMERGENCY:10, ZWAVE_ALARM_TYPE_RESERVED0:0, ZWAVE_ALARM_TYPE_FIRST:255, ZWAVE_ALARM_TYPE_SMOKE:1, ZWAVE_ALARM_TYPE_HEAT:4, zwaveAlarmEvent:2, numberOfEventParameters:0, ZWAVE_ALARM_TYPE_BURGLAR:7, ZWAVE_ALARM_TYPE_CLOCK:11, zwaveAlarmStatus:255, alarmLevel:255, eventParameter:[], ZWAVE_ALARM_TYPE_WATER:5, payload:[1, 255, 0, 255, 1, 2, 0], ZWAVE_ALARM_TYPE_CO2:3, zensorNetSourceNodeId:0, commandId:5, class:class physicalgraph.zwave.commands.alarmv2.AlarmReport, ZWAVE_ALARM_TYPE_CO:2, ZWAVE_ALARM_TYPE_SYSTEM:9, zwaveAlarmType:1, ZWAVE_ALARM_TYPE_POWER_MANAGEMENT:8, alarmType:1, CMD:7105]
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector CMD: AlarmReport(alarmLevel: 255, alarmType: 1, eventParameter: [], numberOfEventParameters: 0, zensorNetSourceNodeId: 0, zwaveAlarmEvent: 2, zwaveAlarmStatus: 255, zwaveAlarmType: 1)
+
+f2f1bf36-836b-40fd-9f37-942aa9af6a8d 1:29:09 PM: debug Smoke Detector description: zw device: 09, command: 7105, payload: 01 FF 00 FF 01 02 00 00

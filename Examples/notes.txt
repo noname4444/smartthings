@@ -1,0 +1,20 @@
+6:12:26 PM: debug Device Properties: [currentStates:[physicalgraph.device.cassandra.DeviceStateCache@7981df2c, physicalgraph.device.cassandra.DeviceStateCache@3d630006, physicalgraph.device.cassandra.DeviceStateCache@2e96a966, physicalgraph.device.cassandra.DeviceStateCache@254b7f6f, physicalgraph.device.cassandra.DeviceStateCache@7f9b6389], shortDelayedCommandsToCassandra:true, schedulingSvc:physicalgraph.scheduling.SchedulingService@164497e1, typeAuthor:SmartThings, hub:physicalgraph.app.HubWrapper@714f4032, scheduledEventService:physicalgraph.app.ScheduledEventService@9ffccbc, id:611d52cc-2c15-4328-ade4-810c714f7437, supportedCommands:[on, off, setLevel, refresh, setHue, setSaturation, setColor, setAdjustedColor, refresh, reset], eventSvc:physicalgraph.event.EventService@3bb6698, installedSmartApp:test_app, preferencesWrapper:null, name:Hue Bulb, network:UNKNOWN, capabilities:[Switch, Switch Level, Refresh, Color Control, Sensor, Actuator], device:Bedroom Flood, typeSettings:{}, execSvc:grails.plugin.executor.PersistenceContextExecutorWrapper@78da4fc4, class:class physicalgraph.app.DeviceWrapper, longDelayedCommandsToCassandra:false, typeName:Hue Bulb, cmdSvc:physicalgraph.device.CommandService@5dfecece, label:Bedroom Flood, supportedAttributes:[switch, level, hue, saturation, color], stateOverrides:[[id:93eb0d80-2795-4f94-b8af-0f888aba9a5e, tileName:device.switch, stateName:off, icon:st.lights.philips.hue-single], [id:41cd56c2-2e55-44ef-a9c7-e03fa7635a2f, tileName:device.switch, stateName:on, icon:st.lights.philips.hue-single], [id:2de709be-651f-41e3-8664-1c0608cb8a7d, tileName:device.switch, stateName:turningOn, icon:st.lights.philips.hue-single], [id:541df449-73e9-48f9-97dd-ccea63fced2b, tileName:device.switch, stateName:turningOff, icon:st.lights.philips.hue-single]], deviceNetworkId:a7963a43-f381-464e-a1b1-507d07290a51/1, displayName:Bedroom Flood]
+
+input(
+	name		: "${deviceID}Level"
+	,type		: "number"
+	,title		: "Brightness level, between 1 and 99.  Defaults to keeping the current level."
+	,range: "1..99"
+	,required	: false
+	,defaultValue: settings["${deviceID}Level"] ?: null
+	,submitOnChange: true
+)
+
+This app is similar to the Gentle Wake Up app in the repository already. The code has been cleaned up and modified to only accept color bulbs. It will then get the forecast for the day, and set the color of the bulb(s) to match the forecast. The first bulb(s) will be used to show the days temperature, the second bulb(s) will be used to show the forecast. Error checking has been added to ensure the same bulb can not be in both groups.
+
+On/Off Button Tile
+
+ [physical:false, device:Jims Scene, digital:false, class:class physicalgraph.app.EventWrapper, installedDevice:null, hub:physicalgraph.app.HubWrapper@3cf858e4, commandService:physicalgraph.device.CommandService@4ac05660, eventService:physicalgraph.event.EventService@6334f56d, event:, installedSmartApp:Simple Manual Scenes, schedulingService:null, stateChange:true]
+
+unsubscribe(getAllChildDevices().find(){it.name == deviceID})
+deleteChildDevice("${app.id}/${deviceID}")
