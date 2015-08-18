@@ -108,7 +108,7 @@ def zwaveEvent(physicalgraph.zwave.commands.wakeupv2.WakeUpNotification cmd, res
     if (!prevBattery || (new Date().time - prevBattery.date.time)/60000 >= 60 * 53) {
         log.debug "Monoprice smoke detector: I'm asking for the battery level"
         results << new physicalgraph.device.HubAction(zwave.batteryV1.batteryGet().format())
-        result << "delay 1200"
+        results << "delay 1200"
     }
 	results << new physicalgraph.device.HubAction(zwave.wakeUpV2.wakeUpNoMoreInformation().format())
 	results << createEvent(descriptionText: "$device.displayName woke up", isStateChange: false)
